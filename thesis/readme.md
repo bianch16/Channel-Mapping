@@ -34,7 +34,11 @@ Blockage Prediction Using Sub-6GHz Channels](http://arxiv.org/abs/1910.02900)
 
 [DeepMIMO: A generic deep learning dataset for millimeter wave and massive MIMO applications](https://arxiv.org/abs/1902.06435)
 
-* This paper describes the dataset used in the research
+* The dataset of the research is based on this paper.
 
+### Deep Learning on beam prediction
 
+[5G MIMO Data for Machine Learning:
+Application to Beam-Selection using Deep Learning](https://ieeexplore.ieee.org/document/8503086)
+* This paper uses the position data of the receiver and blockages as the input to train a NN to select a certain Beamform.
 
