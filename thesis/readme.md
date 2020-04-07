@@ -1,12 +1,12 @@
 # Reference
 
-#### Issues on mmwave communications 
+### Issues on mmwave communications 
 
 [An Overview of Signal Processing Techniques
 for Millimeter Wave MIMO Systems](https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=7400949)
 * clearly describe the problem, current solution in mmwave communications, it is of vital importance in this field.
 
-#### Sth on the dual-band system
+### Sth on the dual-band system
 
 [Estimating Millimeter Wave Channels Using
 Out-of-Band Measurements](https://ieeexplore.ieee.org/document/7888146/)
@@ -16,14 +16,14 @@ Out-of-Band Measurements](https://ieeexplore.ieee.org/document/7888146/)
 Wireless Networks](https://arxiv.org/pdf/1910.05305v1.pdf)
 * Use deep learning to decide whether to switch from 3.5G to 28G band(vise versa)
 
-#### Pilot aided approach in mmwave CE
+### Pilot aided approach in mmwave CE
 
 [Channel Estimation for mmWave Massive MIMO
 Based Access and Backhaul in Ultra-Dense Network](https://ieeexplore.ieee.org/document/7511578)
 
 * This paper points out that when in the UDN(Ultra-Dense Network) case, even in mmwave the SNR is still high.
 
-#### Deep learning based channel-mapping
+### Deep learning based channel-mapping
 
 [5G MIMO Data for Machine Learning: Application to Beam-Selection Using Deep Learning](https://ieeexplore.ieee.org/document/8503086)
 
