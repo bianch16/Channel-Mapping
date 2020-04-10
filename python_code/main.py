@@ -7,6 +7,7 @@ import matplotlib.pyplot as plt
 import math
 import torch.nn as nn 
 import os
+import codebook
 
 
 # system paras
@@ -180,5 +181,7 @@ for iter in range(1):
             count = count+1
     acc.append(count/val_xt.shape[0])
     print(count/val_xt.shape[0])
+
+    # then calculating the achieve rate
 
 print(acc)    # show the accracy for the total process.
