@@ -58,6 +58,21 @@ def de_complex(pilot):
     pilot = np.concatenate((real_pilot,imag_pilot),axis=1)
     return pilot
 
+def reform(pilot):
+    # just change the form of the original .mat file
+    num = pilot.shape[0]
+    col = pilot.shape[1]
+    real_pilot = np.zeros([num,col])
+    imag_pilot = np.zeros([num,col])
+    for i in range(num):
+        tem = pilot[i]
+        for j in range(col):
+            real_pilot[i,j] = tem[j][0]
+            imag_pilot[i,j] = tem[j][1]
+    complex_pilot = np.zeros([num,col],dtype = 'complex32')
+    complex_pilot = complex(real_pilot,imag_pilot)
+    return complex_pilot
+
 def add_noise(pilot,SNR):
     num = pilot.shape[0]
     col = pilot.shape[1]
@@ -72,8 +87,10 @@ def add_noise(pilot,SNR):
     return pilot 
 
 acc = []
+comm_rate = []
 #### loading data from mat files   ###
 import h5py
+from codebook import upa_codebook
 
 
 
@@ -184,4 +201,26 @@ for iter in range(1):
 
     # then calculating the achieve rate
 
+
+    W = upa_codebook(1,64,1,0.5)
+    mmwave_ch = np.array(mmwave_chV)
+    row = mmwave_ch.shape[0]
+    mmwave_ch = mmwave_ch.reshape(row,-1)
+    mmwave_ch = reform(mmwave_chV)    # need revising because of the unknown grammar.
+
+    # assuming everything goes right
+    rate = []
+    for user in range(num_val):
+        H = mmwave_ch[user,:,:]    # 32*64
+        w = W[pred_label[user],:]  # 1*64
+        rec_power = abs(np.dot(H,w.H))*abs(np.dot(H,w.H)) 
+        tem = 0
+        for sub in range(32):
+            tem += np.log2(1+rec_power[sub])
+        tem = tem/32
+        rate.append(tem)
+    comm_rate.append(np.mean(rate))
+
+
 print(acc)    # show the accracy for the total process.
+print(comm_rate)
