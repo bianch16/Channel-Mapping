@@ -8,7 +8,7 @@ import math
 import torch.nn as nn 
 import os
 import codebook
-
+from mod_ant import *
 
 # system paras
 tx_power = [-37.3375  -32.3375  -27.3375  -22.3375  -17.3375  -12.3375   -7.3375]
@@ -71,6 +71,8 @@ def reform(pilot):
             imag_pilot[i,j] = tem[j][1]
     complex_pilot = np.zeros([num,col],dtype = 'complex32')
     complex_pilot = complex(real_pilot,imag_pilot)
+    # note that we may alternate the number of antennas, but will not change the number of subcarriers
+    complex_pilot = complex_pilot.reshape(num,32,col/32)
     return complex_pilot
 
 def add_noise(pilot,SNR):

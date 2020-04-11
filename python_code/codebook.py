@@ -1,6 +1,6 @@
 import numpy as np 
 def phase_shifter(tx,spacing):
-    code = np.zeros([tx,tx])
+    code = np.zeros([tx,tx],dtype = 'complex32')
     theta = np.arange(0,np.pi-1e-10,np.pi/tx)
     for i in range(tx):
         for k in range(tx):
