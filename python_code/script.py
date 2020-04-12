@@ -39,3 +39,11 @@ dummy_input = torch.rand(13, 1, 28, 28) #假设输入13张1*28*28的图片
 model = LeNet()
 with SummaryWriter(comment='LeNet') as w:
     w.add_graph(model, (dummy_input, ))
+import h5py
+import numpy as np
+name = '/home/yyw/chbian/graduation_design/Dataset/'+'dataset'+str(1)+'.mat'
+data=h5py.File(name,'r')
+data = data['dataset']
+
+max_rate = data[('maxRateVal')]
+print(np.mean(max_rate))
