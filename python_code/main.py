@@ -17,7 +17,7 @@ num_subc = 32
 beam_set = 64
 
 # ML paras
-epoches = 1
+epoches = 10
 batch_size = 512
 lr = 0.001
 
@@ -132,12 +132,12 @@ for iter in range(1):
     pilot_train = np.array(pilot_train)
     pilot_train = pilot_train.reshape(num_train,-1)
     pilot_train = de_complex(pilot_train)
-    pilot_train = add_noise(pilot_train,20)
+    pilot_train = add_noise(pilot_train,5)
 
     pilot_val = np.array(pilot_val)
     pilot_val = pilot_val.reshape(num_val,-1)
     pilot_val = de_complex(pilot_val)
-    pilot_val = add_noise(pilot_val,20)
+    pilot_val = add_noise(pilot_val,5)
     
     
     #merging the pilot with the sub6G signal
@@ -149,7 +149,7 @@ for iter in range(1):
 
     num_sample = train_x.shape[0]
 
-    fcn = Fusion()
+    fcn = Fusion().cuda()
     optimizer = optim.Adam(fcn.parameters(), lr = lr)
     loss_fun = nn.CrossEntropyLoss()
 
@@ -170,9 +170,9 @@ for iter in range(1):
                 P = pilot_train[i*batch_size:num_sample, :]
                 Y = train_labels[i*batch_size:num_sample]
 
-            X = torch.from_numpy(X).float()
-            P = torch.from_numpy(P).float()
-            Y = torch.from_numpy(Y).long()
+            X = torch.from_numpy(X).float().cuda()
+            P = torch.from_numpy(P).float().cuda()
+            Y = torch.from_numpy(Y).long().cuda()
             pred = fcn(X,P)
             loss = loss_fun(pred, Y)
             if(i%100 == 0):
@@ -189,8 +189,8 @@ for iter in range(1):
     #############  The Testing Phase!  ############
 
     fcn.eval()
-    val_xt = torch.from_numpy(val_x).float()
-    p = torch.from_numpy(pilot_val).float()
+    val_xt = torch.from_numpy(val_x).float().cuda()
+    p = torch.from_numpy(pilot_val).float().cuda()
     pred_val = fcn(val_xt,p)
     pred_val = pred_val.cpu().detach().numpy()
 
